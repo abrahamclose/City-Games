@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Autocomplete - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var availableTags = [
+      "Atlanta",
+      "Miami",
+      "New York",
+      "Philadelphia",
+      "Washington",
+      "Chicago",
+      "Cincinnati",
+      "Milwaukee",
+      "Pittsburgh",
+      "St. Louis",
+      "Arizona",
+      "Colorado",
+      "Los Angeles",
+      "San Diego",
+      "San Francisco",
+      "Baltimore",
+      "Boston",
+      "Tampa Bay",
+      "Toronto",
+      "Chicago",
+      "Cleveland",
+      "Detroit",
+      "Kansas City",
+      "Minnesota",
+      "Houston",
+      "Los Angeles",
+      "Oakland",
+      "Seattle",
+      "Texas",
+      "Dallas",
+      "Buffalo",
+      "Carolina",
+      "Denver",
+      "Green Bay",
+      "Indianapolis",
+      "Jacksonville",
+      "New England",
+      "New Orleans",
+      "Tennessee",
+      "Brooklyn",
+      "Charlotte",
+      "Golden State",
+      "Indiana",
+      "Memphis",
+      "Oklahoma City",
+      "Orlando",
+      "Phoenix",
+      "Portland",
+      "Sacramento",
+      "San Antonio",
+      "Utah",
+      "Anaheim",
+      "Calgary",
+      "Columbus",
+      "Edmonton",
+      "Florida",
+      "Montreal",
+      "Nashville",
+      "New Jersey",
+      "Ottawa",
+      "San Jose",
+      "Vancouver",
+      "Vegas",
+      "Winnipeg"
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+</head>
+<body style="background-color: deepskyblue">
+ 
+<div class="ui-widget">
+  <label for="tags">City (or State in some cases): </label>
+  <input id="tags">
+</div>
+<h2><a href="index.html">Enter</a></h2>
+ 
+</body>
+</html>

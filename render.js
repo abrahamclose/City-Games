@@ -4,7 +4,7 @@ export const makePage = function() {
     <div class="main-page">
         <h1 class="logo">SportsCity</h1>
         <h1 class="city-choice">City:</h1>
-        <button class="reset-city" type="button">Reset City</button>
+        <h2><a href="citySelector.html">Reset City</a></h2>
         <h1 class="nba">Latest NBA Score:</h1>
         <h1 class="nfl">Latest NFL Score:</h1>
         <h1 class="nhl">Latest NHL Score:</h1>
@@ -16,6 +16,7 @@ export const makePageWithEnterCity = function() {
     return `
     <div class="log-in-out"><button type="button">Log In/Out</button></div>
     <div class="main-page">
+        <button class="reset-city" type="button">Reset City</button>
         <h1 class="logo">SportsCity</h1>
         <h1 class="enter-city">Enter City:</h1>
         <textarea class="input" id="cityTextArea"></textarea>
