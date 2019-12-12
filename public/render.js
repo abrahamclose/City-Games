@@ -1,3 +1,6 @@
+const app = firebase.app();
+const db = firebase.firestore();
+
 export const makePage = function() {
     return `
         <div class="tile is-ancestor">
@@ -21,50 +24,74 @@ export const makePage = function() {
         `;
 };
 
-export const loadSportsPage = function() {
-    const $root = $('.root');
-    const app = firebase.app();
-    const db = firebase.firestore();
-    const teamsRef = db.collection("Teams");
-    const gamesRef = db.collection("Games");
+export const makeScore = function(game, away_team, home_team) {
+    $('.root').append(`
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">${game.league}</p>
+                <p class="title is-pulled-right">${game.date}</p>
+                <p class="subtitle">
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-48x48"><img src="${away_team.icon}"></p>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content"><p>${away_team.name}</p></div>
+                    </div>
+                    <p class="title is-pulled-right">${game.away_score}</p>
+                </article>
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-48x48"><img src="${home_team.icon}"></p>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content"><p><br>${home_team.name}</p></div>
+                    </div>
+                    <p class="title is-pulled-right">${game.home_score}</p>
+                </article>
+                </p>
+            </article>
+        </div>
+    `);
+}
 
-    const query_teams = teamsRef.where("city", "==", "Boston, Massachusetts");
-    let relevant_teams = [];
-    
+export const getTeamsfromCity = function(cityName) {
+    const teamsRef = db.collection("Teams");
+    const query_teams = teamsRef.where("city", "==", cityName);
     query_teams.get()
         .then(teams => {
             teams.forEach(doc => {
-                let data = doc.data();
-                const query_games = teamsRef.where("home_team_id", "==", data.team_id)
-                    .orderBy("date", "asc")
-                query_games.get()
-                    .then(games => {
-                        games.forEach(doc => {
-                            let data = doc.data();
-                            console.log(dat)
-                        });
-                    });
-
-            });
+                getHomeGamesFromTeams(doc.data());
+            })
         });
+}
 
-    console.log(relevant_teams);
-    let relevant_games = [];
-    relevant_teams.forEach(elm => {
-        console.log(elm.team_id);
-        const query_games = teamsRef.where("home_team_id", "==", elm.team_id);
-        query_games.get()
-            .then(games => {
-                games.forEach(doc => {
-                    let data = doc.data();
-                    relevant_games.push(data);
-                });
-            });
-    })
+export const getHomeGamesFromTeams = function (team_object) {
+    console.log(team_object.team_id);
+    
+    const gamesRef = db.collection("Games");
+    const teamsRef = db.collection("Teams");
+    const query_games = gamesRef.where("home_team_id", "==", team_object.team_id).orderBy("date", "asc").limit(1);
+    query_games.get()
+        .then(game => {
+            game.forEach(doc => {
+                let data = doc.data();
+                const query_teams = teamsRef.where("team_id", "==", data.away_team_id).limit(1);
+                query_teams.get()
+                    .then(teams => {
+                        teams.forEach(doc => {
+                            let away = doc.data();
+                            makeScore(data, away, team_object);
+                        })
+                    });
+            })
+        });
+}
 
-    console.log(relevant_games);
+export const loadSportsPage = function() {
+    const $root = $('.root');
 
-    $root.append(makePage());
+    getTeamsfromCity("Boston, Massachusetts");
 }
 
 $(function() {
