@@ -17,7 +17,7 @@ let availableTags = [
     "San Diego",
     "San Francisco",
     "Baltimore",
-    "Boston",
+    "Boston, Massachusetts",
     "Tampa Bay",
     "Toronto",
     "Chicago",
@@ -129,13 +129,13 @@ export const makeBanner = function() {
           <span>Sign in with Google</span>
         </button>
         <div class="search-container">
-            <form autocomplete="off" action="/action_page.php">
+            <form autocomplete="off">
               <div class="autocomplete">
                 <label for="tags">City (or State in some cases): </label>
                 <input id="myInput" class="input" type="text" placeholder="Search for cities" name="search" size="100">
               </div>
-              <button type="submit"><i class="fa fa-search"></i></button>
             </form>
+            <button class="sButton" type="button" id="sButton">Search</button>
         </div>
       </div>`;
 }
@@ -185,12 +185,33 @@ export const getHomeGamesFromTeams = function (team_object) {
 
 export const loadSportsPage = function() {
     const $root = $('.root');
-    
-    $root.append(makeBanner())
+    $root.append(makeBanner());
+    // $('root').on("click", ".sButton", function(event) {
+    //     event.preventDefault();
+    //     console.log(input);
+    //     let input = $('input').val();
+    //     getTeamsfromCity(input);
+    // });
+    // document.getElementsByClassName("sButton").addEventListener("click", function(e) {
+    //     console.log("this runs")
+    // });
+    $(document).ready(function () {
+        $(document).on('click', ".sButton", function() {
+            let input = $('input').val();
+            console.log(input);
+            getTeamsfromCity(input);
+        });
+    });
+    // $(document).ready(function() {
+    //     $('sButton').click( function() {
+    //         let input = $('input').val();
+    //         console.log(input);
+    //         getTeamsfromCity(input);
+    //     });
+    // });
     $(document).ready(function() {
         $('input').keyup(debounce( function() {
             let input = $('input').val();
-            console.log(input);
             let x = document.getElementsByClassName("autocomplete-items");
             for (let i = 0; i < x.length; i++)
             {
@@ -229,7 +250,6 @@ export const loadSportsPage = function() {
         }, 500));
     });
     $root.append(makePage());
-    getTeamsfromCity("Boston, Massachusetts");
 }
 
 $(function() {
