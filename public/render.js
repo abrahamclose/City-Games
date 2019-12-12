@@ -203,15 +203,15 @@ export const loadSportsPage = function() {
             let count = 0
             for (let i = 0; i < availableTags.length; i++)
             {
-                count++;
                 if (availableTags[i].substr(0, input.length).toUpperCase() == input.toUpperCase())
                 {
+                    count++;
                     let validCountry = document.createElement("DIV");
                     validCountry.innerHTML = "<strong>" + availableTags[i].substr(0, input.length) + "</strong>"
                     validCountry.innerHTML += availableTags[i].substr(input.length);
                     validCountry.innerHTML += "<input type='hidden' value='" + input[i] + "'>"
                     validCountry.addEventListener("click", function(e) {
-                        input.value = this.getElementsByTagName("input")[0].value;
+                        $('input').val(availableTags[i]);
 
                         let y = document.getElementsByClassName("autocomplete-items");
                         for (let i = 0; i < y.length; i++)
