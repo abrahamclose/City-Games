@@ -8,5 +8,7 @@ To run:
   in your browser  
     open http://localhost:5000/  
       (may be different than 5000 if you have something running at 5000 so pay attention to ouput of prior command)  
+    
+   
   
- 
+  if need access to firebird, send email to amclose@ad.unc.edu. You will be added as an owner to the firestore db.
