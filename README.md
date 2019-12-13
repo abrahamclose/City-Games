@@ -1,4 +1,4 @@
-# City-Games
+# SportsCity
   
   
 IMPORTANT: this repo has been recently changed to refelct the changes made at the expo today. I had to immediately move out.
