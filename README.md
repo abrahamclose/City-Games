@@ -1,5 +1,9 @@
 # City-Games
-
+  
+  
+IMPORTANT: this repo has been recently changed to refelct the changes made at the expo today. I had to immediately move out.
+  
+  
 To run:  
   run the following commands in the SportsCity dir  
     npm init  
